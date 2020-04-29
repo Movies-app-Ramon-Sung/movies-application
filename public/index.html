@@ -6,13 +6,20 @@
     <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-
-
-
-    <div class="container">
+<form method="GET" action="#">
+    <label for="movie-title">Movie Title: </label>
+    <input id="movie-title" name="movie-title" type="text">
+    <br>
+    <br>
+    <label for="movie-rating">Rate Movie: </label>
+    <input id="movie-rating" name="movie-rating" type="text">
+    <br>
+    <button type="submit">Add</button>
+</form>
+    <div id="main" class="container">
         <h1>Hello There!</h1>
         <br>
-        <h1 class="container" id="load_message"></h1>
+        <h1 class="container" id="load_message">loading...</h1>
         <p>To get started, edit <code>src/index.js</code>.</p>
     </div>
 
