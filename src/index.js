@@ -46,12 +46,42 @@ getMovies().then((movies) => {
   htmlBody += '</table>';
   $('#main').html(htmlBody);
 
+  // API.createMovieLists();
 
 }).catch((error) => {
   alert('Oh no! Something went wrong.\nCheck the console for details.')
   console.log(error);
 });
 
+// Create a form for adding a new movie
+// that has fields for the movie's title and rating
+$('#add_btn').click(function () {
+  let movieTitle = $('#movie-title').val();
+  let movieRating = $('#movie-rating').val();
+  let data = {
+    "title": `${movieTitle}`,
+    "rating": `${movieRating}`
+  };
+
+    const API = {
+      createReview: () => {
+        fetch("/api/movies", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Success:', data);
+            })
+            .catch(error => console.error(error));
+      }
+    };
+    API.createReview();
+    getMovies();
+});
 
 
 
