@@ -83,5 +83,32 @@ $('#add_btn').click(function () {
     getMovies();
 });
 
+$('#edit_btn').click(function () {
+  let editTitle = $('#edit-title').val();
+  let editRating = $('#edit-rating').val();
+  let editData = {
+    "title": `${editTitle}`,
+    "rating": `${editRating}`
+  };
+
+  const API = {
+    editReview: () => {
+      fetch("/api/movies", {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editData),
+      })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+          })
+          .catch(error => console.error(error));
+    }
+  };
+  API.editReview();
+  getMovies();
+});
 
 
