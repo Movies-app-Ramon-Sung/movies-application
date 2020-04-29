@@ -19,6 +19,16 @@
       "title": "bob the builder",
       "rating": "5",
       "id": 4
+    },
+    {
+      "title": "Harry Potter",
+      "rating": "5",
+      "id": 5
+    },
+    {
+      "title": "Rush Hour",
+      "rating": "4",
+      "id": 6
     }
   ]
 }
