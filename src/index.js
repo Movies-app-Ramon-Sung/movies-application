@@ -18,7 +18,7 @@ console.log('movie time!');
  * require style imports
  */
 
-const {getMovies, editReview} = require('./api.js');
+const {getMovies, editReview, deleteReview} = require('./api.js');
 
 let htmlBody = "<table>";
 
@@ -39,10 +39,11 @@ function updateMovies () {
                     <th>Rating</th>
                     <th>id</th>
                 </tr>
-                <tr class="add_editFunc">
+                <tr class="add_editFunc" id="delete_movie">
                     <td class="add_editFunc">${title}</td>
                     <td class="add_editFunc">${rating}</td>
                     <td class="add_editFunc">${id}</td>
+<!--                    <td class="add_editFunc"><button id="delete_btn" >delete</button></td>-->
                 </tr>`
 
 
@@ -50,10 +51,6 @@ function updateMovies () {
 
     htmlBody += '</table>';
     $('#main').html(htmlBody);
-    // $('.add_editFunc').click(function() {
-    //   // go grab the id and use that for url on PATCH URL
-    //   alert('title or rating was clicked!');
-    // });
 
   }).catch((error) => {
     alert('Oh no! Something went wrong.\nCheck the console for details.')
@@ -108,4 +105,20 @@ $('#edit_btn').on("click", function (e) {
   updateMovies();
 });
 
+$('#delete_btn').on("click", function (e) {
+  e.preventDefault();
+  let deleteRow = {
+    "id" : `${deleteID}`
+  };
+  // console.log(deleteRow);
+
+
+  // let deleteData = {
+  //   "title": `${editTitle}`,
+  //   "rating": `${editRating}`,
+  //   "id": `${editID}`
+  // };
+  deleteReview(deleteRow);
+  updateMovies();
+});
 
