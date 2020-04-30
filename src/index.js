@@ -22,15 +22,19 @@ const {getMovies, editReview} = require('./api.js');
 
 let htmlBody = "<table>";
 
-getMovies().then((movies) => {
-  console.log('Here are all the movies:');
-  $("#main").empty();
+updateMovies();
 
-  movies.forEach(({title, rating, id}) => {
+function updateMovies () {
+  htmlBody = "<table>";
+  getMovies().then((movies) => {
+    console.log('Here are all the movies:');
+    $("#main").empty();
 
-    console.log(`id#${id} - ${title} - rating: ${rating}`);
+    movies.forEach(({title, rating, id}) => {
 
-    htmlBody += `<tr class="add_editFunc">
+      console.log(`id#${id} - ${title} - rating: ${rating}`);
+
+      htmlBody += `<tr class="add_editFunc">
                     <th>Title</th>
                     <th>Rating</th>
                     <th>id</th>
@@ -42,20 +46,20 @@ getMovies().then((movies) => {
                 </tr>`
 
 
+    });
+
+    htmlBody += '</table>';
+    $('#main').html(htmlBody);
+    // $('.add_editFunc').click(function() {
+    //   // go grab the id and use that for url on PATCH URL
+    //   alert('title or rating was clicked!');
+    // });
+
+  }).catch((error) => {
+    alert('Oh no! Something went wrong.\nCheck the console for details.')
+    console.log(error);
   });
-
-  htmlBody += '</table>';
-  $('#main').html(htmlBody);
-  // $('.add_editFunc').click(function() {
-  //   // go grab the id and use that for url on PATCH URL
-  //   alert('title or rating was clicked!');
-  // });
-
-}).catch((error) => {
-  alert('Oh no! Something went wrong.\nCheck the console for details.')
-  console.log(error);
-});
-
+};
 // Create a form for adding a new movie
 // that has fields for the movie's title and rating
 $('#add_btn').click(function () {
@@ -83,15 +87,9 @@ $('#add_btn').click(function () {
       }
     };
     API.createReview();
-    getMovies();
+    updateMovies();
 });
 
-// $(document).on("click",".trash", function () {
-//  let Theid = $(this).attr("id");
-//  const url = '/api/movies/' +Theid;
-//}
-
-// var id = $('id');
 
 
 $('#edit_btn').on("click", function (e) {
@@ -101,17 +99,13 @@ $('#edit_btn').on("click", function (e) {
   let editID = $('#id_nums').val();
   console.log(editID);
 
-  // let Theid = $(this).attr("id");
-
-  // const url = '/api/movies/' + editID
   let editData = {
     "title": `${editTitle}`,
     "rating": `${editRating}`,
     "id": `${editID}`
   };
   editReview(editData);
-  getMovies();
-
+  updateMovies();
 });
 
 
