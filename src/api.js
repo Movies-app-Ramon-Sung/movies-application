@@ -2,28 +2,23 @@ module.exports = {
   getMovies: () => {
     return fetch('/api/movies')
       .then(response => response.json());
+  },
+  editReview: (editData) => {
+    const $ = require('jquery');
+    let editID = $('#id_nums').val();
+    const url = '/api/movies/' + editID
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editData),
+    })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch(error => console.error(error));
   }
-};
 
-// const movieData = {
-//   "title": 'Lion King',
-//   "rating": '5',
-//   // "id": `${id}`
-// }
-//
-// const API = {
-//   createMovieLists: () => {
-//     fetch('/api/movies', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(movieData),
-//     })
-//         .then( response => response.json() )
-//         .then( data => console.log(data) )
-//         .catch( error => console.error(error));
-//   }
-// };
-//
-// module.exports = API;
+};

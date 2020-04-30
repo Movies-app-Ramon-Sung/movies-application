@@ -18,41 +18,48 @@ console.log('movie time!');
  * require style imports
  */
 
-const {getMovies} = require('./api.js');
+const {getMovies, editReview} = require('./api.js');
 
 let htmlBody = "<table>";
 
-getMovies().then((movies) => {
-  console.log('Here are all the movies:');
-  $("#main").empty();
+updateMovies();
 
-  movies.forEach(({title, rating, id}) => {
+function updateMovies () {
+  htmlBody = "<table>";
+  getMovies().then((movies) => {
+    console.log('Here are all the movies:');
+    $("#main").empty();
 
-    console.log(`id#${id} - ${title} - rating: ${rating}`);
+    movies.forEach(({title, rating, id}) => {
 
-    htmlBody += `<tr>
+      console.log(`id#${id} - ${title} - rating: ${rating}`);
+
+      htmlBody += `<tr class="add_editFunc">
                     <th>Title</th>
                     <th>Rating</th>
                     <th>id</th>
                 </tr>
-                <tr>
-                    <td>${title}</td>
-                    <td>${rating}</td>
-                    <td>${id}</td>
+                <tr class="add_editFunc">
+                    <td class="add_editFunc">${title}</td>
+                    <td class="add_editFunc">${rating}</td>
+                    <td class="add_editFunc">${id}</td>
                 </tr>`
 
 
+    });
+
+    htmlBody += '</table>';
+    $('#main').html(htmlBody);
+    // $('.add_editFunc').click(function() {
+    //   // go grab the id and use that for url on PATCH URL
+    //   alert('title or rating was clicked!');
+    // });
+
+  }).catch((error) => {
+    alert('Oh no! Something went wrong.\nCheck the console for details.')
+    console.log(error);
   });
-  htmlBody += '</table>';
-  $('#main').html(htmlBody);
-
-  // API.createMovieLists();
-
-}).catch((error) => {
-  alert('Oh no! Something went wrong.\nCheck the console for details.')
-  console.log(error);
-});
-
+};
 // Create a form for adding a new movie
 // that has fields for the movie's title and rating
 $('#add_btn').click(function () {
@@ -80,8 +87,25 @@ $('#add_btn').click(function () {
       }
     };
     API.createReview();
-    getMovies();
+    updateMovies();
 });
 
+
+
+$('#edit_btn').on("click", function (e) {
+  e.preventDefault();
+  let editTitle = $('#edit-title').val();
+  let editRating = $('#edit-rating').val();
+  let editID = $('#id_nums').val();
+  console.log(editID);
+
+  let editData = {
+    "title": `${editTitle}`,
+    "rating": `${editRating}`,
+    "id": `${editID}`
+  };
+  editReview(editData);
+  updateMovies();
+});
 
 
