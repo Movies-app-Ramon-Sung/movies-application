@@ -100,9 +100,10 @@ $('#edit_btn').on("click", function (e) {
   let editRating = $('#edit-rating').val();
   let editID = $('#id_nums').val();
   console.log(editID);
-  let Theid = $(this).attr("id");
 
-  const url = '/api/movies/' + Theid
+  // let Theid = $(this).attr("id");
+
+  // const url = '/api/movies/' + editID
   let editData = {
     "title": `${editTitle}`,
     "rating": `${editRating}`,

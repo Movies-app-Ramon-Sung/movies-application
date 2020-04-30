@@ -4,7 +4,9 @@ module.exports = {
       .then(response => response.json());
   },
   editReview: (editData) => {
-    const url = '/api/movies/' + Theid
+    const $ = require('jquery');
+    let editID = $('#id_nums').val();
+    const url = '/api/movies/' + editID
     fetch(url, {
       method: 'PUT',
       headers: {
