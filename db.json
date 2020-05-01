@@ -16,13 +16,13 @@
       "id": 3
     },
     {
-      "title": "ramon the builder",
+      "title": "RAMON the builder",
       "rating": "5",
       "id": 4
     },
     {
       "title": "Harry Potter",
-      "rating": "1",
+      "rating": "4",
       "id": 5
     },
     {
@@ -31,9 +31,14 @@
       "id": 6
     },
     {
-      "title": "New Movie",
-      "rating": "2",
+      "title": "Parasite",
+      "rating": "4",
       "id": 7
+    },
+    {
+      "title": "Bad Boys",
+      "rating": "4.6",
+      "id": 8
     }
   ]
 }

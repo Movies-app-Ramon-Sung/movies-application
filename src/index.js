@@ -43,7 +43,6 @@ function updateMovies () {
                     <td class="add_editFunc">${title}</td>
                     <td class="add_editFunc">${rating}</td>
                     <td class="add_editFunc">${id}</td>
-<!--                    <td class="add_editFunc"><button id="delete_btn" >delete</button></td>-->
                 </tr>`
 
 
@@ -88,8 +87,6 @@ $('#add_btn').click(function (e) {
     updateMovies();
 });
 
-
-
 $('#edit_btn').on("click", function (e) {
   e.preventDefault();
   let editTitle = $('#edit-title').val();
@@ -109,13 +106,8 @@ $('#edit_btn').on("click", function (e) {
 $('#delete_btn').on("click", function (e) {
   e.preventDefault();
 
-  // let deleteRow = {
-  //   "id" : `${deleteID}`
-  // };
-  // console.log(deleteRow);
-
-
   let deleteData = $('.add_editFunc');
+
   deleteReview(deleteData);
   updateMovies();
 });
