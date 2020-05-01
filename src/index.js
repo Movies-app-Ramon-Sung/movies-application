@@ -59,7 +59,8 @@ function updateMovies () {
 };
 // Create a form for adding a new movie
 // that has fields for the movie's title and rating
-$('#add_btn').click(function () {
+$('#add_btn').click(function (e) {
+  e.preventDefault();
   let movieTitle = $('#movie-title').val();
   let movieRating = $('#movie-rating').val();
   let data = {
@@ -107,18 +108,15 @@ $('#edit_btn').on("click", function (e) {
 
 $('#delete_btn').on("click", function (e) {
   e.preventDefault();
-  let deleteRow = {
-    "id" : `${deleteID}`
-  };
+
+  // let deleteRow = {
+  //   "id" : `${deleteID}`
+  // };
   // console.log(deleteRow);
 
 
-  // let deleteData = {
-  //   "title": `${editTitle}`,
-  //   "rating": `${editRating}`,
-  //   "id": `${editID}`
-  // };
-  deleteReview(deleteRow);
+  let deleteData = $('.add_editFunc');
+  deleteReview(deleteData);
   updateMovies();
 });
 
